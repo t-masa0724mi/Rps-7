@@ -1,19 +1,42 @@
-//
-//  ContentView.swift
-//  RPS-7
-//
-//  Created by 飯塚政美 on 2023/07/10.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isPresented = false
+    
+    var rps: [Rps] = rpsData
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            HStack {
+                Text("コンピューター")
+                Spacer()
+            }
+            Spacer()
+    
+            Text("じゃーんけーん・・・")
+            
+            Spacer()
+            
+            VStack {
+                HStack {
+                    ForEach(rps[0...2]) { item in
+                        RpsButtonView(rps: item)
+                    }
+                }
+                
+                HStack {
+                    ForEach(rps[3...6]) { item in
+                        RpsButtonView(rps: item)
+                    }
+                }
+                .padding()
+            }
+            
+            HStack {
+                Spacer()
+                Text("プレイヤー")
+            }
         }
         .padding()
     }
