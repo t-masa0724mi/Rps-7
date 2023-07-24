@@ -15,9 +15,9 @@ struct RpsView: View {
                 Spacer()
             }
             .padding()
+
+            ComputerHand(computer: Computer(hand: httpClient.computer?.hand ?? 0 ))
             
-            ComputerHand(computer: computerData[1])
-                     
             Text("ぽん!!")
                 .font(.largeTitle)
             
@@ -58,7 +58,7 @@ struct ComputerHand: View {
                 .resizable()
                 .scaledToFit()
         } else if computer.hand == 3 {
-            Image("scissors")
+            Image("paper")
                 .resizable()
                 .scaledToFit()
         } else if computer.hand == 4 {
