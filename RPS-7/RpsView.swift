@@ -3,9 +3,8 @@ import SwiftUI
 struct RpsView: View {
     
     @State private var isPresented = false
-    
-    @ObservedObject var httpClient = HTTPClient()
-    
+    @State private var isApi = false
+    @EnvironmentObject var httpClient: HTTPClient    
     var rps: Rps
     
     var body: some View {
@@ -78,9 +77,8 @@ struct ComputerHand: View {
                 .resizable()
                 .scaledToFit()
         } else {
-            Image("rock")
-                .resizable()
-                .scaledToFit()
+            Text("正しく取得できませんでした")
+                .font(.largeTitle)
         }
   
     }
@@ -89,5 +87,6 @@ struct ComputerHand: View {
 struct RspView_Previews: PreviewProvider {
     static var previews: some View {
         RpsView( rps: rpsData[0])
+            .environmentObject(HTTPClient())
     }
 }
