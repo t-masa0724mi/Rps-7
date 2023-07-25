@@ -3,6 +3,7 @@ import SwiftUI
 struct ResultView: View {
     
     @State private var isPresented = false
+    @State private var isAnimationImage = false
     @ObservedObject var httpClient = HTTPClient()
     var rps: Rps
     
@@ -16,6 +17,7 @@ struct ResultView: View {
             Spacer()
             
             ResultImage(rps: rps, computer: Computer(hand: httpClient.computer?.hand ?? 0))
+                .scaleEffect(isAnimationImage ? 1.0 : 0.6)
             
             Spacer()
             
@@ -35,6 +37,9 @@ struct ResultView: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 isPresented = true
+            }
+            withAnimation(.easeOut(duration: 0.5)) {
+                isAnimationImage = true
             }
         }
         .fullScreenCover(isPresented: $isPresented) {
